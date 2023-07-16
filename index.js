@@ -5,7 +5,7 @@ const port=5000;
 
 
 // midlewire
-
+app.use(express.json())
 app.use(cors())
 
 app.get('/',(req,res)=>{
@@ -21,6 +21,16 @@ const users =[
 
 app.get("/users",(req,res)=>{
     res.send(users)
+})
+
+app.post("/users",(req,res)=>{
+    console.log("data post now");
+    const user=req.body;
+    user.id=users.length+1;
+    users.push(user)
+
+    console.log(user);
+    res.send(user)
 })
 app.listen(port,()=>{
     console.log(`server runnig on ${port}`);
